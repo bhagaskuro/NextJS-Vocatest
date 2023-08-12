@@ -1,3 +1,4 @@
+"use client";
 import { Inter } from "next/font/google";
 import Footer from "../components/footer";
 import Header from "../components/header";
@@ -11,12 +12,10 @@ export const metadata = {
 
 export default function ProfileLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <div className="px-20 py-10">{children}</div>
-        <Footer />
-      </body>
-    </html>
+    <>
+      <Header />
+      <div className="px-20 py-10">{children}</div>
+      <Footer />
+    </>
   );
 }

@@ -1,4 +1,15 @@
+"use client";
+
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 export default function Profile() {
+  const { user } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <>
       <div className="flex flex-row w-full  justify-center items-center">
@@ -8,42 +19,16 @@ export default function Profile() {
               <h1 className="text-5xl font-bold mb-4">User Profile</h1>
             </div>
 
-            <form className="mb-8 ">
-              <div className="w-full max-w-full">
-                <div className="form-control w-full max-w-none ">
-                  <label className="label">
-                    <span className="label-text  ">Username</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Ketik username anda disini .."
-                    className="input input-bordered  input-ghost w-full rounded-full"
-                  />
-                </div>
-
-                <div className="form-control w-full max-w-none mt-4">
-                  <label className="label">
-                    <span className="label-text ">Nama</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Ketik nama anda disini .."
-                    className="input input-bordered input-ghost w-full rounded-full"
-                  />
-                </div>
-
-                <div className="form-control w-full max-w-none mt-4">
-                  <label className="label">
-                    <span className="label-text ">Nomor Handphone</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Nomor Handphone anda .."
-                    className="input input-bordered  input-ghost w-full rounded-full"
-                  />
-                </div>
-              </div>
-            </form>
+            <div>
+              <p>Username:</p>
+              <p className="text-xl font-semibold mt-2 mb-10">
+                {user.username}
+              </p>
+              <p>Nama:</p>
+              <p className="text-xl font-semibold mt-2 mb-10">{user.name}</p>
+              <p>No Telp:</p>
+              <p className="text-xl font-semibold mt-2 mb-10">{user.phone}</p>
+            </div>
           </div>
         </div>
       </div>

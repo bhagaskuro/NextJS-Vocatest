@@ -29,6 +29,9 @@ export default function Header() {
               <li>
                 <Link href="/profile/edit">Edit Profile</Link>
               </li>
+              {/* <li>
+                <Link href="/profile/change-password">Change Password</Link>
+              </li> */}
               <li>
                 <Link href="/login">Logout</Link>
               </li>
