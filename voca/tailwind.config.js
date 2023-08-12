@@ -15,4 +15,23 @@ module.exports = {
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          primary: "#86efac",
+          secondary: "#22c55e",
+          "primary-focus": "mediumblue",
+        },
+      },
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+          primary: "#be123c",
+          secondary: "#be123c",
+        },
+      },
+    ],
+  },
 };
