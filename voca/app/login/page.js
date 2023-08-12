@@ -1,9 +1,55 @@
 "use client";
 
+import { LOGIN } from "@/redux/reducers/users";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LightDark from "../components/LightDark";
+import Cookies from "js-cookie";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const hasil = useSelector((state) => state.users);
+
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+
+  function handleChange(event) {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    let result = hasil.users.find(
+      (o) => o.username.toLowerCase() == form.username.toLowerCase()
+    );
+
+    if (result !== undefined) {
+      if (result.password === form.password) {
+        let limit = new Date(new Date().getTime() + 1 * 60 * 1000);
+        Cookies.set("loggedIn", true, {
+          expires: limit,
+        });
+
+        dispatch(LOGIN(result));
+        router.push("/profile");
+      } else {
+        alert("Something went wrong");
+      }
+    } else {
+      alert("Something went wrong");
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-screen">
@@ -28,14 +74,14 @@ export default function Login() {
           </div>
 
           <div className="flex flex-1 flex-col max-w-full justify-center px-24 relative">
-            <div class="absolute top-0 right-0 h-16 w-16 pt-10 ">
+            <div className="absolute top-0 right-0 h-16 w-16 pt-10 ">
               <LightDark />
             </div>
             <div className="mb-5">
               <h1 className="text-5xl font-bold text-secondary mb-4 ">
                 Silahkan Login
               </h1>
-              <p>Masukkan username dan passowrd anda untuk masuk</p>
+              <p>Masukkan username dan password anda untuk masuk</p>
             </div>
 
             <form className="mb-8">
@@ -46,8 +92,10 @@ export default function Login() {
                   </label>
                   <input
                     type="text"
+                    onChange={handleChange}
                     placeholder="Username anda .."
                     className="input input-bordered w-full rounded-full"
+                    name="username"
                   />
                 </div>
 
@@ -57,16 +105,19 @@ export default function Login() {
                   </label>
                   <input
                     type="password"
+                    onChange={handleChange}
                     placeholder="Password anda .."
                     className="input input-bordered w-full rounded-full"
+                    name="password"
                   />
                 </div>
 
-                <Link href="/profile">
-                  <button className="btn btn-secondary w-full text-white rounded-full mt-8">
-                    Masuk Sekarang
-                  </button>
-                </Link>
+                <button
+                  onClick={handleSubmit}
+                  className="btn btn-secondary w-full text-white rounded-full mt-8"
+                >
+                  Masuk Sekarang
+                </button>
               </div>
             </form>
 

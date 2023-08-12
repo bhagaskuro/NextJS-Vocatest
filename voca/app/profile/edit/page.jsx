@@ -1,6 +1,48 @@
+"use client";
 import Link from "next/link";
+import { UPDATE, LOGIN } from "@/redux/reducers/users";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Profile() {
+export default function editProfile() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { user, users } = useSelector((state) => state.users);
+  let newUsers = [...users];
+
+  const [form, setForm] = useState({
+    username: user.username,
+    name: user.name,
+    phone: user.phone,
+  });
+
+  function handleChange(event) {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const i = newUsers.findIndex((x) => x.username === user.username);
+
+    let newData = {
+      username: form.username,
+      name: form.name,
+      phone: form.phone,
+      password: user.password,
+      repassword: user.repassword,
+    };
+    newUsers[i] = newData;
+    dispatch(UPDATE(newUsers));
+
+    dispatch(LOGIN(newData));
+    router.push("/profile");
+  }
+
   return (
     <>
       <div className="flex flex-row w-full  justify-center items-center">
@@ -21,6 +63,9 @@ export default function Profile() {
                     type="text"
                     placeholder="Ketik username anda disini .."
                     className="input input-bordered  input-ghost w-full rounded-full"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -32,6 +77,9 @@ export default function Profile() {
                     type="text"
                     placeholder="Ketik nama anda disini .."
                     className="input input-bordered input-ghost w-full rounded-full"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -43,37 +91,19 @@ export default function Profile() {
                     type="text"
                     placeholder="Nomor Handphone anda .."
                     className="input input-bordered  input-ghost w-full rounded-full"
-                  />
-                </div>
-
-                <div className="form-control w-full max-w-none mt-4">
-                  <label className="label">
-                    <span className="label-text  ">Password</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Masukkan password anda .."
-                    className="input input-bordered input-ghost w-full rounded-full "
-                  />
-                </div>
-
-                <div className="form-control w-full max-w-none mt-4">
-                  <label className="label">
-                    <span className="label-text  ">Konfirmasi Password</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Masukkan kembali password anda .."
-                    className="input input-bordered  input-ghost w-full rounded-full"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
             </form>
-            <Link href="/profile">
-              <button className="btn btn-active btn-white w-full rounded-full mt-8">
-                Edit Profile
-              </button>
-            </Link>
+            <button
+              onClick={handleSubmit}
+              className="btn btn-active btn-white w-full rounded-full mt-8"
+            >
+              Edit Profile
+            </button>
           </div>
         </div>
       </div>
