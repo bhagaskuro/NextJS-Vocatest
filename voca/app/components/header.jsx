@@ -1,7 +1,18 @@
 import Link from "next/link";
 import LightDark from "./LightDark";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    Cookies.remove("loggedIn");
+
+    router.push("/login");
+  }
+
   return (
     <>
       <div className="navbar bg-primary px-24">
@@ -33,7 +44,7 @@ export default function Header() {
                 <Link href="/profile/change-password">Change Password</Link>
               </li> */}
               <li>
-                <Link href="/login">Logout</Link>
+                <a onClick={handleSubmit}>Logout</a>
               </li>
             </ul>
           </div>

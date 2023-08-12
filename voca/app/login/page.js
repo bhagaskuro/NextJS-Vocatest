@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LightDark from "../components/LightDark";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -34,6 +35,11 @@ export default function Login() {
 
     if (result !== undefined) {
       if (result.password === form.password) {
+        let limit = new Date(new Date().getTime() + 1 * 60 * 1000);
+        Cookies.set("loggedIn", true, {
+          expires: limit,
+        });
+
         dispatch(LOGIN(result));
         router.push("/profile");
       } else {
