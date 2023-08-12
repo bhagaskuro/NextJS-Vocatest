@@ -6,6 +6,16 @@ Simple website using React and NextJS for Vocagame Technical Test
 
 First, run the development server:
 
+install the package using
+
+```bash
+npm i
+# or
+npm install
+```
+
+then
+
 ```bash
 npm run dev
 # or
