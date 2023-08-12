@@ -14,7 +14,7 @@ export default function ProfileLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <div className="px-24 py-10">{children}</div>
+        <div className="px-20 py-10">{children}</div>
         <Footer />
       </body>
     </html>

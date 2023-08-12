@@ -11,7 +11,7 @@ export default function Home() {
             <LightDark />
           </div>
           <div className="flex flex-row w-full  justify-center items-center">
-            <div className="w-6/12">
+            <div className="w-full sm:w-full md:w-8/12 xl:w-6/12 ">
               <div className="flex flex-1 flex-col max-w-full justify-center px-24 relative">
                 <div className="mb-5  primary">
                   <h1 className="text-5xl font-bold mb-4">Daftarkan Akun</h1>
