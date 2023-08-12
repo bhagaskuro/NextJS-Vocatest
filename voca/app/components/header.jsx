@@ -1,12 +1,20 @@
 import Link from "next/link";
+import LightDark from "./LightDark";
 
 export default function Header() {
   return (
     <>
-      <div className="navbar bg-yellow-600 px-24">
+      <div className="navbar bg-primary px-24">
         <div className="flex-1">
-          <a className="normal-case text-xl">VocaTest</a>
+          <Link className="normal-case text-xl" href="/profile">
+            VocaTest
+          </Link>
         </div>
+
+        <div className="flex-none gap-2">
+          <LightDark />
+        </div>
+
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

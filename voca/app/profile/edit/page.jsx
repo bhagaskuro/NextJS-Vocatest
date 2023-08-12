@@ -6,7 +6,8 @@ export default function Profile() {
       <div className="flex flex-row w-full  justify-center items-center">
         <div className="w-8/12">
           <div className="flex flex-1 flex-col max-w-full justify-center px-24 relative">
-            <div className="mb-5 ">
+            <Link href="/profile">← BACK</Link>
+            <div className="mb-5 mt-5 ">
               <h1 className="text-5xl font-bold mb-4">Edit Profile</h1>
             </div>
 
