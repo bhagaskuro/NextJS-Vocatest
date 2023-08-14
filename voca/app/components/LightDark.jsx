@@ -2,9 +2,13 @@
 import { useEffect, useState } from "react";
 
 export default function LightDark() {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
+  let tema = "light";
+  if (typeof window !== "undefined") {
+    tema = localStorage.getItem("theme")
+      ? localStorage.getItem("theme")
+      : "light";
+  }
+  const [theme, setTheme] = useState(tema);
 
   const handleToogle = (e) => {
     if (e.target.checked) {
@@ -15,7 +19,9 @@ export default function LightDark() {
   };
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+    }
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
