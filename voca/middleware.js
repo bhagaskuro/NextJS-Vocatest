@@ -5,16 +5,24 @@ export default function middleware(req) {
   let url = req.url;
 
   if (!verify && url.includes("/profile")) {
-    return NextResponse.redirect("http://localhost:3000/login");
+    return NextResponse.redirect(
+      "https://vocatest-qnvjgylmd-bhagaskuro.vercel.app/login"
+    );
   }
   if (!verify && url.includes("/edit")) {
-    return NextResponse.redirect("http://localhost:3000/login");
+    return NextResponse.redirect(
+      "https://vocatest-qnvjgylmd-bhagaskuro.vercel.app/login"
+    );
   }
   if (!verify && url.includes("/change-password")) {
-    return NextResponse.redirect("http://localhost:3000/login");
+    return NextResponse.redirect(
+      "https://vocatest-qnvjgylmd-bhagaskuro.vercel.app/login"
+    );
   }
 
   if (verify && url.includes("/login")) {
-    return NextResponse.redirect("http://localhost:3000/profile");
+    return NextResponse.redirect(
+      "https://vocatest-qnvjgylmd-bhagaskuro.vercel.app/profile"
+    );
   }
 }
